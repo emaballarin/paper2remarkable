@@ -35,7 +35,6 @@ clean: ## Clean build dist and egg directories left after install
 	rm -rf ./$(PACKAGE).egg-info
 	rm -rf $(VENV_DIR)
 	rm -f MANIFEST
-	rm -f ./p2r.1
 	find . -type f -iname '*.pyc' -delete
 	find . -type d -name '__pycache__' -empty -delete
 
