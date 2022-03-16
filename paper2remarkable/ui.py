@@ -105,9 +105,7 @@ def build_argument_parser():
         default=None,
     )
     parser.add_argument(
-        "--qpdf",
-        help="path to qpdf executable (default: qpdf)",
-        default=None,
+        "--qpdf", help="path to qpdf executable (default: qpdf)", default=None
     )
     parser.add_argument(
         "--rmapi",
@@ -334,4 +332,6 @@ def main():
         [None] * len(args.input) if not args.filename else args.filename
     )
 
-    runner(args.input, filenames, options, debug=args.debug)
+    runner(
+        args.input, filenames, options, args.remarkable_dir, debug=args.debug
+    )
