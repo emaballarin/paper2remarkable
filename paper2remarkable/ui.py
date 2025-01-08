@@ -13,6 +13,7 @@ import copy
 import os
 import sys
 
+import validators
 import yaml
 
 from . import GITHUB_URL
@@ -22,7 +23,6 @@ from .exceptions import UnidentifiedSourceError
 from .providers import LocalFile
 from .providers import providers
 from .utils import follow_redirects
-from .utils import is_url
 
 
 def build_argument_parser():
@@ -214,7 +214,9 @@ def choose_provider(cli_input, source_type=None):
         # input is a local file or user specified source type is file
         new_input = cli_input
         provider = LocalFile
-    elif source_type == "url" or (source_type is None and is_url(cli_input)):
+    elif source_type == "url" or (
+        source_type is None and validators.url(cli_input)
+    ):
         # input is a url or user specified source type is url
         new_input, cookiejar = follow_redirects(cli_input)
         provider = next((p for p in providers if p.validate(new_input)), None)
